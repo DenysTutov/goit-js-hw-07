@@ -4,11 +4,9 @@ import { galleryItems } from "./gallery-items.js";
 console.log(galleryItems);
 
 const galleryList = document.querySelector(".gallery");
-
 const galleryMarkup = createMarkupGallery(galleryItems);
 
 galleryList.insertAdjacentHTML("beforeend", galleryMarkup);
-
 galleryList.addEventListener("click", onGalleryItemClick);
 
 function createMarkupGallery(array) {
