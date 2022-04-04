@@ -8,6 +8,7 @@ const markupGallery = createMarkupGallery(galleryItems);
 
 galleryList.insertAdjacentHTML("beforeend", markupGallery);
 
+// Создание динамической разметки
 function createMarkupGallery(array) {
   return array
     .map(({ preview, original, description }) => {
@@ -18,6 +19,7 @@ function createMarkupGallery(array) {
     .join("");
 }
 
+// Создание и настройка библиотеки simplelightbox
 let gallery = new SimpleLightbox(".gallery a", {
   enableKeyboard: true,
   showCounter: false,
