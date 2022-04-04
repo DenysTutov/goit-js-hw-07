@@ -40,31 +40,28 @@ function onGalleryItemClick(event) {
   onBasicLightbox(galleryImageUrlBig);
 }
 
+let instance = {};
+
 function onBasicLightbox(imgUrl) {
-  const instance = basicLightbox.create(
-    `<img src="${imgUrl}" width="800" height="600">`
+  instance = basicLightbox.create(
+    `<img src="${imgUrl}" width="800" height="600">`,
+    {
+      onShow: () => {
+        window.addEventListener("keydown", onEscKeyPress);
+      },
+      onClose: () => {
+        window.removeEventListener("keydown", onEscKeyPress);
+      },
+    }
   );
 
-  instance.show(() => {
-    window.addEventListener("keydown", onEscKeyPress);
-  });
+  instance.show();
+}
 
-  const backdrop = document.querySelector(".basicLightbox");
-  backdrop.addEventListener("click", onBackdropClickRemoveListener);
+function onEscKeyPress(event) {
+  const ESC_KEY_CODE = "Escape";
 
-  function onBackdropClickRemoveListener(event) {
-    if (event.currentTarget === event.target) {
-      window.removeEventListener("keydown", onEscKeyPress);
-    }
-  }
-
-  function onEscKeyPress(event) {
-    const ESC_KEY_CODE = "Escape";
-    console.log(event.code);
-
-    if (event.code === ESC_KEY_CODE) {
-      instance.close();
-      window.removeEventListener("keydown", onEscKeyPress);
-    }
+  if (event.code === ESC_KEY_CODE) {
+    instance.close();
   }
 }
